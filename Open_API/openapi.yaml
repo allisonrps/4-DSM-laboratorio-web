@@ -1,0 +1,124 @@
+openapi: 3.0.3
+
+info:
+    title: API de Produtos
+    description: Produtos de Venda da Empresa X
+    termsOfService: http://swagger.io/terms/
+    contact:
+        # name: Allison Rodrigues de Paula e Silva
+        # url: ''
+        email: allison.silva3@fatec.sp.gov.br
+    license:
+        name: Apache 2.0
+        url: http://swagger.io/terms/
+    version: 1.0.0
+
+servers:
+    - url: http://sistema-compass-homolog.com.br
+    - url: http://sistema-compass.com.br
+
+paths:
+    /produtos:
+        post:
+            summary: Cadastra novos produtos
+            description: Cadastra novos produtos
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ProdutoRequest"
+            responses:
+                "201":
+                    description: Sucesso no cadastro do produto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ProdutoResponse"
+        get:
+            summary: Retorna todos os produtos
+            description: Retorna todos os produtos
+            responses:
+                "200":
+                    description: Retorna todos os produtos
+
+components:
+    schemas:
+        ProdutoRequest:
+            type: object
+            properties:
+                descricao:
+                    type: string
+                    description: Descricao do produto
+                    example: Geladeira
+                    maxLength: 100
+                    minLength: 5
+                preco:
+                    type: object
+                    properties:
+                        custo:
+                            type: number
+                            format: decimal
+                            example: 19.99
+                            description: Preço de custo do produto
+                        venda:
+                            type: number
+                            format: decimal
+                            example: 25.87
+                            description: Preço de venda do produto
+                marca:
+                    type: string
+                    description: Marca do produto
+                    example: Brastemp
+                modelo:
+                    type: string
+                    description: modelos do produto
+                    example: XXXG84D
+                categorias:
+                    type: array
+                    items:
+                        type: string
+                    example: [Eletronicos, Eletrodomesticos, Geladeira]
+            required:
+                - descricao
+                - categorias
+                - preco
+
+        ProdutoResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    example: 29394
+                descricao:
+                    type: string
+                    description: Descricao do produto
+                    example: Geladeira
+                    maxLength: 100
+                    minLength: 5
+                preco:
+                    type: object
+                    properties:
+                        custo:
+                            type: number
+                            format: decimal
+                            example: 19.99
+                            description: Preço de custo do produto
+                        venda:
+                            type: number
+                            format: decimal
+                            example: 25.87
+                            description: Preço de venda do produto
+                marca:
+                    type: string
+                    description: Marca do produto
+                    example: Brastemp
+                modelo:
+                    type: string
+                    description: modelos do produto
+                    example: XXXG84D
+                categorias:
+                    type: array
+                    items:
+                        type: string
+                    example: [Eletronicos, Eletrodomesticos, Geladeira]
